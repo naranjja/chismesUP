@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">chismesUP</string>
+    <string name="version">1.0</string>
+    <string name="splash">Splash</string>
+    <string name="enter_student_id">Enter student ID</string>
+    <string name="validate">Validate</string>
+    <string name="invalid_user">Invalid user</string>
+</resources>

@@ -5,4 +5,7 @@
     <string name="enter_student_id">Enter student ID</string>
     <string name="validate">Validate</string>
     <string name="invalid_user">Invalid user</string>
+    <string name="social">Social</string>
+    <string name="courses">Courses</string>
+    <string name="recent_gossip">Recent gossip</string>
 </resources>

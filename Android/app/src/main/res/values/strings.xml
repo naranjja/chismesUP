@@ -2,10 +2,11 @@
     <string name="app_name">chismesUP</string>
     <string name="version">1.0</string>
     <string name="splash">Splash</string>
-    <string name="enter_student_id">Enter student ID</string>
+    <string name="enter_student_email">Enter student email</string>
     <string name="validate">Validate</string>
     <string name="invalid_user">Invalid user</string>
     <string name="social">Social</string>
     <string name="courses">Courses</string>
     <string name="recent_gossip">Recent gossip</string>
+    <string name="logout">Logout</string>
 </resources>

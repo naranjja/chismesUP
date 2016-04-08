@@ -3,6 +3,8 @@ package com.example.jose.chismesup.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jose.chismesup.R;
+import com.example.jose.chismesup.common.SaveSharedPreference;
 
 /**
  * Login activity
@@ -22,6 +25,8 @@ import com.example.jose.chismesup.R;
 public class ValidationActivity extends Activity {
 
     FrameLayout bValidate;
+    EditText etEmail;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +37,10 @@ public class ValidationActivity extends Activity {
         bValidate = (FrameLayout) findViewById(R.id.bValidate);
         bValidate.setOnClickListener(new LoginClickListener());
 
-        EditText etStudentId = (EditText) findViewById(R.id.etStudentID);
-        etStudentId.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        etEmail = (EditText) findViewById(R.id.etEmail);
+
+
+        etEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_GO) {
@@ -56,9 +63,11 @@ public class ValidationActivity extends Activity {
         @Override
         public void onClick(View view) {
 
+            email = etEmail.getText().toString();
             hightlightButton(bValidate);
 
-            if (validateUser()) {
+            if (validateUser(email)) {
+                SaveSharedPreference.setUserName(ValidationActivity.this, email);
                 launchMainActivity();
 
             } else {
@@ -69,10 +78,8 @@ public class ValidationActivity extends Activity {
 
     }
 
-    private boolean validateUser() {
-        EditText etStudentID = (EditText) findViewById(R.id.etStudentID);
-        String studentID = etStudentID.getText().toString();
-        return studentID.length() == 8 && (studentID.charAt(0) == '1' || studentID.charAt(0) == '2');
+    private boolean validateUser(String email) {
+        return !email.isEmpty() && email.contains("@alum.up.edu.pe");
     }
 
     private void showErrorMessage() {

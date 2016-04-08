@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.example.jose.chismesup.R;
+import com.example.jose.chismesup.common.SaveSharedPreference;
 
 /**
  * Splash activity
@@ -31,14 +32,18 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 if (!isFinishing()) {
-                    // if the user has not logged in yet
-                    launchValidationActivity();
-
-                    // if the user has already logged in
-                    // launchMainActivity();
+                    if (isLoggedIn()) {
+                        launchMainActivity();
+                    } else {
+                        launchValidationActivity();
+                    }
                 }
             }
         }, 2000);
+    }
+
+    private boolean isLoggedIn() {
+        return SaveSharedPreference.getUserName(SplashActivity.this).length() != 0;
     }
 
     private void launchValidationActivity() {
@@ -48,23 +53,21 @@ public class SplashActivity extends Activity {
     }
 
     private void launchMainActivity() {
-        Intent intent = new Intent(SplashActivity.this, SplashActivity.class);
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
-
-
 
     private class SplashClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
 
-            // if the user has not logged in yet
-            launchValidationActivity();
-
-            // if the user has already logged in
-            // launchMainActivity();
+            if (isLoggedIn()) {
+                launchMainActivity();
+            } else {
+                launchValidationActivity();
+            }
         }
 
     }

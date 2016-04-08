@@ -64,7 +64,8 @@ public class MainActivity extends Activity {
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     String comment = etComment.getText().toString();
-                    commentList.add(new Comment(ValidationActivity.user, comment));
+                    commentList.add(new Comment(SaveSharedPreference.getUserName(MainActivity.this), comment));
+                    lvComments.invalidateViews();
                     return true;
                 }
                 return false;

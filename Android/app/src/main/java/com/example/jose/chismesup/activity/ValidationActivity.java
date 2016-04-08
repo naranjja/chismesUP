@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.jose.chismesup.R;
 import com.example.jose.chismesup.common.SaveSharedPreference;
 
+import java.util.Random;
+
 /**
  * Login activity
  * Created by Jose on 4/6/2016
@@ -68,7 +70,6 @@ public class ValidationActivity extends Activity {
             hightlightButton(bValidate);
 
             if (validateUser(email)) {
-                SaveSharedPreference.setUserName(ValidationActivity.this, email);
                 setUser(email);
                 launchMainActivity();
 
@@ -97,8 +98,9 @@ public class ValidationActivity extends Activity {
     }
 
     private void setUser(String email) {
-        int delimiter = email.indexOf("@");
-        user = email.substring(0, delimiter);
+        Random rand = new Random();
+        user = email.substring(0, 1) + email.substring(2, 5) +  Integer.toHexString(rand.nextInt(0x10) + 0x10);
+        SaveSharedPreference.setUserName(ValidationActivity.this, user);
     }
 
 }

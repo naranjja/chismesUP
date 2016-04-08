@@ -3,15 +3,23 @@ package com.example.jose.chismesup.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.jose.chismesup.Comment;
 import com.example.jose.chismesup.R;
+import com.example.jose.chismesup.adapter.CommentAdapter;
 import com.example.jose.chismesup.common.SaveSharedPreference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Main Activity
@@ -24,6 +32,9 @@ public class MainActivity extends Activity {
     FrameLayout bCourses;
     FrameLayout bLogout;
     ImageView camera;
+    ListView lvComments;
+    EditText etComment;
+    List<Comment> commentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,30 @@ public class MainActivity extends Activity {
         bCourses = (FrameLayout) findViewById(R.id.bCourses);
         bLogout = (FrameLayout) findViewById(R.id.bLogout);
         camera = (ImageView) findViewById(R.id.camera);
+        etComment = (EditText) findViewById(R.id.etComment);
+
+        etComment.setHorizontallyScrolling(false);
+        etComment.setMaxLines(Integer.MAX_VALUE);
+
+        lvComments = (ListView) findViewById(R.id.lvComments);
+
+        commentList = new ArrayList<>();
+        CommentAdapter commentAdapter;
+
+        commentAdapter = new CommentAdapter(commentList, this);
+        lvComments.setAdapter(commentAdapter);
+
+        etComment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    String comment = etComment.getText().toString();
+                    commentList.add(new Comment(ValidationActivity.user, comment));
+                    return true;
+                }
+                return false;
+            }
+        });
 
         bSocial.setOnClickListener(new View.OnClickListener() {
 

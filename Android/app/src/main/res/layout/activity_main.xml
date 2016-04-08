@@ -67,16 +67,17 @@
         android:layout_marginTop="16dp">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/etComment"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@color/white"
             android:gravity="top|left"
-            android:inputType="textMultiLine"
+            android:inputType="text"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="50dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:imeOptions="actionSend"/>
 
         <ImageView
             android:id="@+id/camera"
@@ -106,9 +107,10 @@
         android:id="@+id/lvComments"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="400dp"/>
 
     <FrameLayout
+        android:layout_marginTop="20dp"
         android:id="@+id/bLogout"
         android:layout_below="@id/lvComments"
         android:layout_width="wrap_content"

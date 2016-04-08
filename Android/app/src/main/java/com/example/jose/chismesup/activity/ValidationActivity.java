@@ -27,6 +27,7 @@ public class ValidationActivity extends Activity {
     FrameLayout bValidate;
     EditText etEmail;
     String email;
+    public static String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class ValidationActivity extends Activity {
 
             if (validateUser(email)) {
                 SaveSharedPreference.setUserName(ValidationActivity.this, email);
+                setUser(email);
                 launchMainActivity();
 
             } else {
@@ -92,6 +94,11 @@ public class ValidationActivity extends Activity {
 
     private void unhightlightButton(FrameLayout button) {
         button.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+    }
+
+    private void setUser(String email) {
+        int delimiter = email.indexOf("@");
+        user = email.substring(0, delimiter);
     }
 
 }
